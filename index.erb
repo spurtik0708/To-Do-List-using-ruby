@@ -1,0 +1,54 @@
+<!-- Updated HTML with additional features -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+  <title>To-Do List</title>
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+    <ul id="task-list">
+      <!-- Tasks will be added dynamically here -->
+    </ul>
+    <div class="add-task">
+      <input type="text" id="new-task" placeholder="Add a new task">
+      <input type="date" id="due-date">
+      <button onclick="addTask()">Add Task</button>
+    </div>
+  </div>
+
+  <script>
+    function addTask() {
+      var newTask = document.getElementById('new-task').value;
+      var dueDate = document.getElementById('due-date').value;
+
+      if (newTask !== '') {
+        var taskList = document.getElementById('task-list');
+        var listItem = document.createElement('li');
+        listItem.innerHTML = `
+          <span>${newTask}</span>
+          <span class="due-date">${dueDate}</span>
+          <button onclick="completeTask(this)">Complete</button>
+          <button onclick="deleteTask(this)">Delete</button>
+        `;
+        taskList.appendChild(listItem);
+        document.getElementById('new-task').value = '';
+        document.getElementById('due-date').value = '';
+      }
+    }
+
+    function completeTask(button) {
+      var taskItem = button.parentNode;
+      taskItem.classList.toggle('completed');
+    }
+
+    function deleteTask(button) {
+      var taskItem = button.parentNode;
+      taskItem.remove();
+    }
+  </script>
+</body>
+</html>
